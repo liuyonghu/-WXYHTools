@@ -19,7 +19,7 @@ class YHTools {
                 var sMobile = options.phone;
 
                 if (!(/^1[0-9][0-9]\d{8}$/.test(sMobile))) {
-                        // console.log(typeof(sMobile.length) + "  " + typeof(11));
+                        // // console.log(typeof(sMobile.length) + "  " + typeof(11));
                         return false;
                 } else {
                         return true;
@@ -40,7 +40,7 @@ class YHTools {
 
         removeLocalData(options) {
                 try {
-                        // console.log(" removeLocalData(options) { = "+ options);
+                        // // console.log(" removeLocalData(options) { = "+ options);
                         wx.removeStorageSync(options);
                         return true;
                 } catch (err) {
@@ -73,17 +73,17 @@ class YHTools {
         }
         refreshLoginCode() { //待优化
                 var that = this;
-                // console.log("tool refreshLoginCode()  = " + JSON.stringify(that.getLocalData("code")));
+                // // console.log("tool refreshLoginCode()  = " + JSON.stringify(that.getLocalData("code")));
                 // return;
                 // 登录
 
                 wx.login({
                         success: function(data) {
-                                // console.log('data ===== ' + JSON.stringify(data)); 
+                                // // console.log('data ===== ' + JSON.stringify(data)); 
                                 var code = data.code;
                                 var now = new Date();
                                 var codeTime = now.getTime();
-                                // console.log("codeTime  = " + codeTime);
+                                // // console.log("codeTime  = " + codeTime);
                                 that.saveLocalData({
                                         "code": code,
                                         "codeTime": codeTime,
@@ -115,7 +115,7 @@ class YHTools {
         }
 
         checkRes(options) {
-                // console.log("checkRes = "+JSON.stringify(options));
+                // // console.log("checkRes = "+JSON.stringify(options));
                 var httpCode = options.statusCode;
                 if (httpCode == "401") {
                         wx.showModal({
@@ -142,7 +142,7 @@ class YHTools {
         // 获得日期
         getDateStr(date,fullMonth) {
                 var monthonFlag = fullMonth ? 0 : 1;
-                console.log("monthonFlag = " + monthonFlag);
+                // console.log("monthonFlag = " + monthonFlag);
                 return date.getFullYear() + "-" + this.checkDateFormatter(date.getMonth() + monthonFlag) + "-" + this.checkDateFormatter(date.getDate()) + " " + this.checkDateFormatter(date.getHours()) + ":"+ this.checkDateFormatter(date.getMinutes()) 
         }
         // 显示提示框
