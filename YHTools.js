@@ -51,7 +51,13 @@ class YHTools {
         getLocalData(options) {
 
                 try {
-                        return wx.getStorageSync(options);
+                        var value = wx.getStorageSync(options);
+                        if (value && value != ""){
+                                return value ;
+                        }else{
+                                return false;
+                        }
+                        
                 } catch (err) {
                         return false;
                 }
