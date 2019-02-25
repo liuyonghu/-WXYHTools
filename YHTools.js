@@ -89,13 +89,18 @@ class YHTools {
                                 var code = data.code;
                                 var now = new Date();
                                 var codeTime = now.getTime();
-                                // // console.log("codeTime  = " + codeTime);
+                         
                                 that.saveLocalData({
                                         "code": code,
                                         "codeTime": codeTime,
                                         "appId": config.Config.appId,
                                         "appSecret": config.Config.appSecret
                                 });
+                        
+                                console.log("code  = " + that.getLocalData("code"));
+                        },
+                        fail:function(fail){
+                                console.log("fail  = " + JSON.stringify(fail)); 
 
                         }
                 })
