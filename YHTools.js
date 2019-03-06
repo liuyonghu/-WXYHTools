@@ -154,7 +154,7 @@ class YHTools {
         getDateStr(date, fullMonth) {
                 var monthonFlag = fullMonth ? 0 : 1;
                 // console.log("monthonFlag = " + monthonFlag);
-                return date.getFullYear() + "-" + this.checkDateFormatter(date.getMonth() + monthonFlag) + "-" + this.checkDateFormatter(date.getDate()) + " " + this.checkDateFormatter(date.getHours()) + ":" + this.checkDateFormatter(date.getMinutes())
+                return date.getFullYear() + "-" + this.checkDateFormatter(date.getMonth() + monthonFlag) + "-" + this.checkDateFormatter(date.getDate()) + " " + this.checkDateFormatter(date.getHours()) + ":" + this.checkDateFormatter(date.getMinutes());
         }
         // 显示提示框
         showModal(options) {
