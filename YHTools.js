@@ -288,9 +288,9 @@ class YHTools {
                                         })
                                 });
                         } else {
-                                
+
                                 wx.hideLoading();
-                                const typeValue = typeof (callBack);
+                                const typeValue = typeof(callBack);
                                 const upperCase = typeValue.toUpperCase();
                                 console.log("--- else  checkAppVersion--- " + upperCase);
                                 // console.log("checkAppVersion  -  callBack");
@@ -302,13 +302,34 @@ class YHTools {
                                         that.showModal({
                                                 title: '提示',
                                                 content: callBack,
-                                                showCancel:false,
+                                                showCancel: false,
                                         })
                                 }
 
                         }
 
                 })
+        }
+
+        checkSDKVersion() {
+                const that = this;
+                const res = wx.getSystemInfoSync();
+                // console.log("res = " + JSON.stringify(res));
+                const sdkVersion = res.SDKVersion;
+                const configVersion = config.Config.SDKVersion;
+                if (sdkVersion < configVersion) {
+                        // console.log("update wx !");
+                        that.showModal({
+                                title: '提示',
+                                content: '微信版本过低，请更新微信！',
+                                showCancel: false
+                        })
+                        return false;
+                } else {
+                        return true;
+                        // console.log(" wx ok!");  
+                }
+
         }
 }
 
