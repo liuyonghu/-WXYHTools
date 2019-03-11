@@ -108,11 +108,12 @@ class YHTools {
                 return that.getLocalData("code");
         }
 
-        netErr() {
+        netErr(msg) {
+
                 wx.hideLoading();
                 wx.showModal({
                         title: '提示',
-                        content: '请检查网络后重试！',
+                        content: msg || '请检查网络后重试！',
                         showCancel: false,
                         confirmColor: "#287fe8"
                 })
@@ -235,6 +236,80 @@ class YHTools {
                 }
         }
 
+
+        checkAppVersion(callBack) {
+                // console.log("--- checkAppVersion--- ");
+                const that = this;
+                wx.showLoading({
+                        title: '正在检查版本',
+                        mask: true
+                })
+                const updateManager = wx.getUpdateManager();
+                updateManager.onCheckForUpdate(function(res) {
+                        // 请求完新版本信息的回调
+                        if (res.hasUpdate) {
+                                console.log("--- hasUpdate  checkAppVersion--- ");
+                                wx.hideLoading();
+                                wx.showLoading({
+                                        title: '发现有新版本，正在更新中..',
+                                        mask: true
+                                })
+                                updateManager.onUpdateReady(function() {
+                                        wx.hideLoading()
+                                        wx.showToast({
+                                                title: '更新完成，即将重启',
+                                                duration: "1000",
+                                                icon: "success",
+                                                mask: true,
+                                                complete: function() {
+                                                        wx.clearStorageSync();
+                                                        updateManager.applyUpdate();
+                                                }
+
+                                        })
+
+                                });
+
+                                updateManager.onUpdateFailed(function() {
+                                        wx.hideLoading();
+                                        wx.showModal({
+                                                title: '更新失败',
+                                                content: '请检查网络！',
+                                                confirmColor: "#287fe8",
+                                                showCancel: false,
+                                                success: function(res) {
+                                                        if (res.confirm) {
+                                                                //     wx.reLaunch({
+                                                                //         url: "/pages/SMSCodePage/SMSCodePage",
+                                                                //     })
+
+                                                        }
+                                                }
+                                        })
+                                });
+                        } else {
+                                
+                                wx.hideLoading();
+                                const typeValue = typeof (callBack);
+                                const upperCase = typeValue.toUpperCase();
+                                console.log("--- else  checkAppVersion--- " + upperCase);
+                                // console.log("checkAppVersion  -  callBack");
+                                if (callBack && upperCase == "FUNCTION") {
+                                        callBack();
+
+                                } else if (callBack && upperCase == "STRING") {
+                                        console.log("--- showToast  checkAppVersion--- ");
+                                        that.showModal({
+                                                title: '提示',
+                                                content: callBack,
+                                                showCancel:false,
+                                        })
+                                }
+
+                        }
+
+                })
+        }
 }
 
 module.exports = YHTools;
