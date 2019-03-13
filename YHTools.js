@@ -331,6 +331,24 @@ class YHTools {
                 }
 
         }
+
+        // c s k x app tool func
+        getStartEndPointFunc(peice) {
+                var ftGetOnLocationFtSiteId = peice.ftGetOnLocationFtSiteId || peice.getOnLocationFtSiteId;
+                var ftGetOffLocationFtSiteId = peice.ftGetOffLocationFtSiteId || peice.getOffLocationFtSiteId;
+                var ftReSitesOfLine = peice.ftReSitesOfLine || peice.siteIdList;
+
+                ftReSitesOfLine.forEach(function(point, index) {
+                        if (point.siteId == ftGetOnLocationFtSiteId) {
+                                peice.realyMemberStartPoint = point;
+                        }
+
+                        if (point.siteId == ftGetOffLocationFtSiteId) {
+                                peice.realyMemberEndPoint = point;
+                        }
+                });
+                return peice;
+        }
 }
 
 module.exports = YHTools;
