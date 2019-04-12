@@ -262,7 +262,9 @@ class YHTools {
                                                 icon: "success",
                                                 mask: true,
                                                 complete: function() {
-                                                        wx.clearStorageSync();
+                                                        if (callBack) {
+                                                                callBack();
+                                                        }
                                                         updateManager.applyUpdate();
                                                 }
 
