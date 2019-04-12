@@ -250,10 +250,10 @@ class YHTools {
                         if (res.hasUpdate) {
                                 console.log("--- hasUpdate  checkAppVersion--- ");
                                 wx.hideLoading();
-                                wx.showLoading({
-                                        title: '更新中..',
-                                        mask: true
-                                })
+                                // wx.showLoading({
+                                //         title: '更新中..',
+                                //         mask: true
+                                // })
                                 updateManager.onUpdateReady(function() {
                                         wx.hideLoading()
                                         wx.showToast({
