@@ -351,6 +351,31 @@ class YHTools {
                 });
                 return peice;
         }
+
+        findObjFromArrByProperty(arrary, property, propertyBol) {
+            
+                if (propertyBol) {
+                        var  key ;
+                        for (var i in property) {
+                                key = i;
+                        }
+                        
+                        for (var i = 0; i < arrary.length; i++) {
+                                let item = arrary[i];
+                                if (item[key] == property[key]) {
+                                        return item;
+                                }
+                        }
+                } else {
+                        for (var i = 0; i < arrary.length; i++) {
+                                let item = arrary[i];
+                                if (item == property) {
+                                        return item;
+                                }
+                        }
+                }
+
+        }
 }
 
 module.exports = YHTools;
