@@ -376,6 +376,16 @@ class YHTools {
                 }
 
         }
+
+
+        saveCurrentPageToStack(){
+                let [...pageStack] = getCurrentPages();
+                this.saveLocalData({ "ppage":pageStack.pop().route});
+        }
+
+        getStackPage(){
+                return this.getLocalData("ppage");
+        }
 }
 
 module.exports = YHTools;
