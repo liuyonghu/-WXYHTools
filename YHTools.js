@@ -193,7 +193,7 @@ class YHTools {
         }
 
 
-        // 获取共多少浮点位
+
         returnFloatNum(num) {
                 var strArr = (typeof(num) + "").toUpperCase() == "string" ? num.split(".") : num.toString().split(".");
                 var strVal = strArr.pop();
@@ -201,7 +201,6 @@ class YHTools {
 
         }
 
-        // has emoji character
         hasEmojiCharacter(substring) {
                 for (var i = 0; i < substring.length; i++) {
                         var hs = substring.charCodeAt(i);
