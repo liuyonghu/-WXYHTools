@@ -247,12 +247,8 @@ class YHTools {
                 updateManager.onCheckForUpdate(function(res) {
                         // 请求完新版本信息的回调
                         if (res.hasUpdate) {
-                                console.log("--- hasUpdate  checkAppVersion--- ");
+                                // console.log("--- hasUpdate  checkAppVersion--- ");
                                 wx.hideLoading();
-                                // wx.showLoading({
-                                //         title: '更新中..',
-                                //         mask: true
-                                // })
                                 updateManager.onUpdateReady(function() {
                                         wx.hideLoading()
                                         wx.showToast({
@@ -293,13 +289,13 @@ class YHTools {
                                 wx.hideLoading();
                                 const typeValue = typeof(callBack);
                                 const upperCase = typeValue.toUpperCase();
-                                console.log("--- else  checkAppVersion--- " + upperCase);
+                                // console.log("--- else  checkAppVersion--- " + upperCase);
                                 // console.log("checkAppVersion  -  callBack");
                                 if (callBack && upperCase == "FUNCTION") {
                                         callBack();
 
                                 } else if (callBack && upperCase == "STRING") {
-                                        console.log("--- showToast  checkAppVersion--- ");
+                                        // console.log("--- showToast  checkAppVersion--- ");
                                         that.showModal({
                                                 title: '提示',
                                                 content: callBack,
@@ -352,13 +348,13 @@ class YHTools {
         }
 
         findObjFromArrByProperty(arrary, property, propertyBol) {
-            
+
                 if (propertyBol) {
-                        var  key ;
+                        var key;
                         for (var i in property) {
                                 key = i;
                         }
-                        
+
                         for (var i = 0; i < arrary.length; i++) {
                                 let item = arrary[i];
                                 if (item[key] == property[key]) {
@@ -377,13 +373,24 @@ class YHTools {
         }
 
 
-        saveCurrentPageToStack(){
+        saveCurrentPageToStack() {
                 let [...pageStack] = getCurrentPages();
-                this.saveLocalData({ "ppage":pageStack.pop().route});
+                this.saveLocalData({
+                        "ppage": pageStack.pop().route
+                });
         }
 
-        getStackPage(){
+        getStackPage() {
                 return this.getLocalData("ppage");
+        }
+
+        getUrlParsByObj(obj) {
+                var urPar = '';
+                for (var key in obj) {
+                        console.log(key);
+                        urPar = urPar + key + "=" + obj[key] + "&"
+                }
+                return urPar.substr(0, urPar.length - 1);
         }
 }
 
