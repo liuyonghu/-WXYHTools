@@ -387,10 +387,20 @@ class YHTools {
         getUrlParsByObj(obj) {
                 var urPar = '';
                 for (var key in obj) {
-                        console.log(key);
+                        // console.log(key);
                         urPar = urPar + key + "=" + obj[key] + "&"
                 }
                 return urPar.substr(0, urPar.length - 1);
+        }
+
+        cUrlToJsonStr(urlC) {
+                let urlComponents = decodeURIComponent(urlC).split("&");
+                var obj = {};
+                urlComponents.forEach(function(item) {
+                        let itemComponents = item.split("=");
+                        obj[itemComponents[0]] = itemComponents[1];
+                });
+                return obj;
         }
 }
 
