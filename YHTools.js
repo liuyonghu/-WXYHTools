@@ -26,26 +26,57 @@ class YHTools {
                 }
         }
         // storge
-        saveLocalData(options) {
-                try {
-                        for (var key in options) {
-                                wx.setStorageSync(key, options[key]);
+        saveLocalData(options, asyncBol) {
+                if (asyncBol) {
+                        try {
+                                for (var key in options) {
+                                        wx.setStorage({
+                                                key: key,
+                                                data: options[key],
+                                        });
+                                }
+                                return true;
+                        } catch (err) {
+                                return false;
                         }
-                        return true;
-                } catch (err) {
-                        return false;
+
+                } else {
+                        try {
+                                for (var key in options) {
+                                        wx.setStorageSync(key, options[key]);
+                                }
+                                return true;
+                        } catch (err) {
+                                return false;
+                        }
                 }
+                
 
         }
 
-        removeLocalData(options) {
-                try {
-                        // // console.log(" removeLocalData(options) { = "+ options);
-                        wx.removeStorageSync(options);
-                        return true;
-                } catch (err) {
-                        return false;
+        removeLocalData(options, asyncBol) {
+                if (asyncBol){
+                        try {
+                                // // console.log(" removeLocalData(options) { = "+ options);
+                                wx.removeStorage({
+                                        key: 'options',
+                                        success: function(res) {},
+                                });
+                                return true;
+                        } catch (err) {
+                                return false;
+                        }
+
+                }else{
+                        try {
+                                // // console.log(" removeLocalData(options) { = "+ options);
+                                wx.removeStorageSync(options);
+                                return true;
+                        } catch (err) {
+                                return false;
+                        }
                 }
+              
         }
 
         getLocalData(options) {
