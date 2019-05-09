@@ -59,7 +59,7 @@ class YHTools {
                         try {
                                 // // console.log(" removeLocalData(options) { = "+ options);
                                 wx.removeStorage({
-                                        key: 'options',
+                                        key: options,
                                         success: function(res) {},
                                 });
                                 return true;
