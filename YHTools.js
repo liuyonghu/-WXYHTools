@@ -50,12 +50,12 @@ class YHTools {
                                 return false;
                         }
                 }
-                
+
 
         }
 
         removeLocalData(options, asyncBol) {
-                if (asyncBol){
+                if (asyncBol) {
                         try {
                                 // // console.log(" removeLocalData(options) { = "+ options);
                                 wx.removeStorage({
@@ -67,7 +67,7 @@ class YHTools {
                                 return false;
                         }
 
-                }else{
+                } else {
                         try {
                                 // // console.log(" removeLocalData(options) { = "+ options);
                                 wx.removeStorageSync(options);
@@ -76,7 +76,7 @@ class YHTools {
                                 return false;
                         }
                 }
-              
+
         }
 
         getLocalData(options) {
@@ -432,6 +432,44 @@ class YHTools {
                         obj[itemComponents[0]] = itemComponents[1];
                 });
                 return obj;
+        }
+
+        yhSetPageData(key, value, type, subKey1, subKey2) {
+
+                var pages = getCurrentPages();
+                var currentPage = pages[pages.length - 1],
+                        keyTemp;
+                if (type != undefined) {
+                        let typeUper = type.trim().toUpperCase();
+                        // console.log(typeUper);
+                        switch (typeUper) {
+                                case ("A"):
+                                        {
+                                                if (subKey1 !=undefined){
+                                                        keyTemp = key + "[" + subKey1 + "]." + subKey2 ;
+                                                }else{
+                                                        keyTemp = key + "[" + subKey1 + "]";
+                                                }
+                                        };
+                                        break;
+                                case ("O"):
+                                        {
+                                                keyTemp = key + "." + subKey;
+                                        };
+                                        break;
+                                default:
+                                        {
+
+                                        };
+                                        break;
+                        };
+                } else {
+                        keyTemp = key;
+                };
+                var obj = new Object();
+                obj[keyTemp] = value;
+                // console.log("keyTemp = " + keyTemp+" \n yhSetPageData = " + JSON.stringify(obj));
+                currentPage.setData(obj);
         }
 }
 
