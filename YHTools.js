@@ -279,12 +279,12 @@ class YHTools {
                         // 请求完新版本信息的回调
                         if (res.hasUpdate) {
                                 // console.log("--- hasUpdate  checkAppVersion--- ");
-                                wx.hideLoading();
+                            
                                 updateManager.onUpdateReady(function() {
-                                        wx.hideLoading()
+                                        wx.hideLoading();
                                         wx.showToast({
                                                 title: '更新完成，即将重启',
-                                                duration: "1000",
+                                                duration: 1000,
                                                 icon: "success",
                                                 mask: true,
                                                 complete: function() {
