@@ -471,6 +471,12 @@ class YHTools {
                 // console.log("keyTemp = " + keyTemp+" \n yhSetPageData = " + JSON.stringify(obj));
                 currentPage.setData(obj);
         }
+        
+        arraryDelectObjects(arrary,startObj,length){
+            let index = arrary.indexOf(startObj);
+            arrary.splice(index, length);
+            return arrary;
+        }
 }
 
 module.exports = YHTools;
